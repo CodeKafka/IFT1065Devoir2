@@ -1,0 +1,449 @@
+\documentclass[16pt]{report}
+\input{preamble.tex}
+\usepackage[scr]{rsfso}
+
+
+\title{\Huge{Structure Discrète}\\{IFT1065}\\{\textbf{Devoir 2}} \\ {Récursivité et Preuves}}
+\author{\huge{Franz Girardin et Aiya}}
+\date{\today}
+\lstset{inputencoding=utf8/latin1}
+
+            %%%%%%%%%%%%%%%%%  Sect.                          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{helvet}
+\titleformat{\chapter}
+  {\fontfamily{phv}\bfseries\huge} % format
+  {}                % label
+  {0pt}             % sep
+  {\color{myb}\huge}           % before-code
+
+
+
+\titleformat{\section}
+  {\normalfont\scshape}{\thesection}{1em}{}
+
+
+% Customizing the spacing for the chapter titles
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+
+\usepackage{mathpazo}
+\begin{document}
+\maketitle
+\pagebreak
+\tableofcontents 
+\pagebreak
+
+\pagebreak
+\begin{multicols*}{2}
+
+
+    \chapter{Résolution de problèmes}
+
+    \section*{Problème 1 $\quad$ $\cdot$  $\quad$ Divisibilité}
+    \begin{enumerate}
+        \item Montrez que $a$ divise $b$ si et seulement si $an$ divise $bn$. Reformulez la proposition
+        en langage logique, puis écrivez sa preuve en explicitant chaque technique utilisée.
+    \end{enumerate}
+
+    Soit le proposition $P(a, b, n) : a $ divise $b$ \textbf{si et seulement si} $an$ divise $bn$, 
+    nous pouvons réécrire $P(a, b, n)$ en language logique de la façon suivante :
+    \[ P(a,b,n) \Coloneqq a|b \Leftrightarrow  an|bn \]
+
+    Nous savons qu'une telle proposition biconditionnelle est une synthèse de \textbf{propositions conditionnelles}
+    distinctes que nous appellerons $P_r$ et $P_s$ :
+
+    \begin{align}
+              &P_q \Coloneqq a|b \implies  an|bn \\ 
+              &P_r \Coloneqq an|bn \implies a|b
+    \end{align}     
+    \paragraph{}
+    \textbf{Pour montrer la véracité de $P(a,b,c)$}, nous allons donc montrer que $P_q$ et $P_r$ sont vrais. 
+    
+    \begin{prop}{($P_q$)}{}
+        \[ a|b \implies  an|bn \]
+    \end{prop}
+    
+    \begin{Preuve*}{($P_q$)}{}
+        Nous allons montrer $P_q$ par \textcolor{red}{\textit{preuve directe}}.    
+        Supposons que $a$ divise $b$. \textbf{Par définition}, cela signifie qu'il existe un nombre 
+        $c \in \mathbb{Z}$ tel que 
+        \textcolor{myb}{$b = ac$}. Et, trivialement, $bn = acn$ Nous avons alors : 
+        \begin{align*}
+            an|bn &\equiv an|\textcolor{myg}{(ac) \cdot n} \\
+                        &\equiv an|(an) \cdot c \\
+                        &\equiv an|an \cdot c
+        \end{align*}
+        Autrement dit, si $an$ divise \textcolor{myg}{$(an)\cdot  c$}, 
+        cela veut dire qu'il existe un nombre $d \in \mathbb{Z}$ tel que 
+        $an \cdot d = an \cdot c$. D'une part, cela implique  que $d = c$. 
+        Par ailleurs, nous constatons que $bn$ est un multiple de $an$, car $bn$ peut être exprimé comme 
+        $an$ multiplié par un entier $c$. Par conséquent, nous concluons 
+        que $an$ divise $bn$.
+        \qed 
+    \end{Preuve*}    
+
+    \begin{prop}{($P_r$)}{}
+        \[ an|bn \implies  a|b \]
+    \end{prop}
+
+    \begin{Preuve*}{($P_r$)}{}
+        Nous voulons prouver que si $an$ divise $bn$, \textbf{alors} $a$ divise forcément $b$ ($P_r$). 
+        Nous allons montrer $P_r$ par \textcolor{red}{\textit{preuve directe}}. Supposons que $an$ divise $bn$. 
+        \textbf{Par définition}, cela signifie qu'il existe un entier $k \in \mathbb{Z}$ tel que 
+        \textcolor{myb}{$an \cdot k = bn$}.  En divisant les deux côtés de l'équation par $n$, 
+        nous obtenons $b = ak$. \textbf{Or}, si nous substituons la valeur que 
+        nous venons de dériver de $b$, nous avons : 
+                            \[ a|b \equiv a|ak \]
+        Cette équivalence tient, puisque toute division de $ak$ par $a$ implique de diviser $b$ par $a$.  
+        Autrement dit, $ak$ est une multiple de 
+        $a$; on peut obtenir $ak$ en multipliant $a$ par un facteur $k$. Cela revient à dire 
+        que $b$ est un multiple de $a$ et donc, \textbf{par définition}, $a|b$ Par conséquent, nous 
+        concluons que si $an|bn$, alors $a|b$, puisque $b$ est un multiple de $a$. \qed
+    \end{Preuve*}
+    
+
+    \paragraph{}
+    Nous venons de montrer que la proposition $P_q$ et sa réciproque $P_r$ sont toutes deux vraies 
+    Par la définition d'une \textit{proposition biconditionnelle}, nous concluons que la proposition :
+                        \[ an|bn \Leftrightarrow  a|b \]
+    est vraie. Autrement dit, $P(a,b,n) \Coloneqq$ \textit{an divise bn si et seulement si a divise b }
+    est vraie. \qed
+    
+
+    \begin{enumerate}
+        \item[2.] Montrez que si n ne divise pas ab, alors n ne divise ni a, ni b.
+            Reformulez la proposition en langage logique, puis écrivez sa preuve en explicitant
+            chaque technique utilisée.
+    \end{enumerate}
+
+    Soit la proposition $P^{\prime}(a,b, n)$ : si $n$ ne divise pas $ab$, alors $n$ ne divise 
+    ni $a$, ni $b$. Nous pouvons réécrire $P^{\prime}(a,b, n)$ en language logique de la façon suivante : 
+                        \[ P^{\prime}(a,b, n) \Coloneqq  n \nmid ab \implies  (n \nmid a) \land (n \nmid b) \]
+    Nous faisons face à une proposition conditionnelle où le côté droit de l'implication contient 
+    une conjonction.
+
+    \begin{prop}{($P^{\prime}(a,b, n)$)}{}
+        \[ n \nmid ab \implies  (n \nmid a) \land (n \nmid b) \]
+    \end{prop}
+
+    \begin{Preuve*}{}{}
+        Nous voulons prouver que si un nombre $n$ ne divise pas $ab$, alors ce nombre ne divise ni $a$ ni $b$. 
+        Nous allons montrer $P^{\prime}(a,b, n)$ par \textcolor{red}{\textit{contraposé}}. Supposon la négation 
+        du côté droit de l'implication. Autrement dit, supposons :
+        \[ \neg \left( (n \nmid a) \land (n \nmid b) \right) \]
+        Par \textbf{De Morgan}, nous avons 
+
+        \begin{align*}
+            \neg \left( (n \nmid a) \land (n \nmid b) \right) &\equiv  \neg (n \nmid a) \lor \neg (n \nmid b)
+                    \\ 
+                                  &\equiv  (n | a) \lor (n | b)
+        \end{align*}
+        Nous allons alors prouver que si $n|a$ \textbf{ou} $n|b$, alors, $n|ab$, soit la \textbf{contraposée} de 
+        $P^{\prime}(a,b, n)$. 
+
+        \begin{align}
+                (n|a) \lor (n|b) \implies n|ab                    
+        \end{align}
+
+        \begin{note}{}{}
+            Intuitivement, nous savons déjà que si on nombre $n$ divise un nombre
+            $a$ ou un nombre $b$, ce nombre $n$ divise nécessairement, le produit $ab$.
+        \end{note}
+
+        \textit{\textcolor{red}{Preuve par cas}}. \vspace{1em} \\
+        \underline{\textbf{Cas 1}} : $n|a$ \underline{\textbf{Cas 2}} $n|b$. \\ 
+        Sans perte de généralité, si $n|a$, \textbf{alors} il existe un entier $k \in \mathbb{Z}$ tel que 
+        $nk = a$. Donc, $ab = (nk) \cdot b$. Et pour diviser $ab$, 
+        il faut que $n$ divise $n \cdot (kb)$ ;  autrement dit, \textbf{pour que $n$ divise $ab$}, 
+        \textbf{il suffit que que $n$ divise $n$}, ce qui est toujours vrai pour tous $n \in \mathbb{Z^*}$. 
+        \begin{align*}
+            n|ab &\equiv n|(nk) \cdot b \\
+                 &\equiv n|n \cdot (kb) \\ 
+                 &\equiv n|nkb
+        \end{align*}
+        Par conséquent, $nkb$ est un multiple de $n$ et nous concluons alors que $n$ divise $ab$, puisque 
+        par substitutions $n$ divise $ab$.
+        
+        \paragraph{}
+        Ayant, indiqué que le \underline{\textbf{Cas 2}} se traite de façon similaire au \underline{\textbf{Cas 1}},
+        nous concluons que, dans les deux cas, $n$ divise $ab$. Nous venons donc de prouver la contraposée 
+        de $P^{\prime}(a,b,n)$. Puisque la contraposée de $P^{\prime}(a,b,n)$ est vraie, il s'ensuit que 
+        $P^{\prime}(a,b,n)$ est aussi vraie. Nous concluons alors que si un entier $n$ ne divise pas un produit 
+        $ab$, alors cet entier $n$ ne divise ni $a$ ni $b$. \qed 
+    \end{Preuve*}
+
+    \begin{enumerate}
+        \item[3.] Remarquez que la réciproque de (2.) n’est pas vraie. Donnez un contre-exemple. 
+    \end{enumerate}
+
+    La récirpoque de $P^{\prime}(a,b, n)$, $Q^{\prime}(a,b, n)$ peut être réécrite comme suit: 
+    \[  Q^{\prime}(a,b, n) \Coloneqq (n \nmid a) \land (n \nmid b)  \implies  n \nmid ab \]
+    Et cela revient à affirmer que \textit{ si un nombre \textcolor{myb}{$n$} ne divise   
+        pas un nombre \textcolor{myb}{$a$} ni un nombre \textcolor{myb}{$b$}, alors ce nombre
+    \textcolor{myb}{$n$} ne divise pas le produit \textcolor{myb}{$ab$}}. Cette proposition est fausse.   
+
+    \begin{Preuve*}{}{}
+        Nous allons prouver que la réciproque de $P^{\prime}(a,b,n)$ est fausse par 
+        \textcolor{red}{\textit{contre-exemple}}. 
+        Pour réfuter $Q^{\prime}(a,b,n)$, nous allons montrer qu'il existe des entiers 
+        $a, b, n \in \mathbb{Z}$ tels que $n \nmid a$ et $n \nmid b$ et pourtant $n | ab$. 
+        Soit $n = 4$, $a = 2$, $b = 6$, et $ab = 12$. Nous savons que 
+        $4$ ne divise pas $2$. Nous savons également que $4$ ne divise $6$. Or, $4$ divise 
+        $12$. Nous avons donc un exemple de $a, b, n \in \mathbb{Z}$ qui contredit $Q^{\prime}(a,b,n)$. 
+        Nous concluons que $Q^{\prime}(a,b,n)$ est faux. \qed
+    \end{Preuve*}
+
+    \begin{enumerate}
+        \item[4.] Montrez que n divise a et b si et seulement si n divise pgcd(a; b). Reformulez
+        la proposition en langage logique, puis écrivez sa preuve en explicitant chaque
+        technique utilisée.
+    \end{enumerate}
+
+    Soit la proposition $P^{\prime\prime}(a,b,n)$ : $n$ divise $a$ \textbf{et} $b$  
+    \textbf{si et seulement si}  $n$ divise $pgcd(a,b)$, nous pouvons réécrire $P^{\prime\prime}(a,b,n)$ 
+    en language logique de la façon suivante: 
+    \[ P^{\prime\prime}(a,b,n)  \Coloneqq (n|a) \land (n|b)  \Leftrightarrow n|pgcd(a,b) \]
+    Nous savons qu'une telle proposition biconditionnelle est une synthèse de \textbf{propositions conditionnelles}
+    distinctes que nous appellerons $P^{\prime\prime}_r$ et $P^{\prime\prime}_s$ :
+
+
+    \begin{align}
+              &P^{\prime\prime}_q \Coloneqq (n|a) \land (n|b) \implies  n|pgcd(a,b) \\ 
+              &P^{\prime\prime}_r \Coloneqq n|pgcd(a,b) \implies (n|a) \land (n|b)
+    \end{align}  
+    \paragraph{}
+    \textbf{Pour montrer la véracité de $P^{\prime\prime}(a,b,c)$}, 
+    nous allons donc montrer que $P^{\prime\prime}_q$ et $P^{\prime\prime}_r$ sont vrais.
+
+
+    \begin{prop}{($P^{\prime\prime}_q(a,b, n)$)}{}
+        \[ (n|a) \land (n|b) \implies  n|pgcd(a,b) \]
+    \end{prop}
+
+    \begin{Preuve*}{}{}
+       Nous voulons montrer que si $n$ divise $a$ et $n$ divise $b$, \textbf{alors}, $n$ 
+       divise le plus grand commun diviseur de $a$ et $b$. Nous allons montrer 
+        $P^{\prime\prime}_q(a,b, n)$ par \textcolor{red}{\textit{preuve directe}}. 
+        \begin{Lemme}{}{}
+            Le pgcd(a,b) est un multiple de n'importe quel diviseur commun de $a$ et $b$.
+        \end{Lemme}
+        Ce Lemme découle de la définition du pgcd, qui est le plus grand diviseur commun de \( a \) et \( b \),
+        impliquant qu'il est un multiple de tous les autres diviseurs communs. \vspace{1em}\\
+
+        Supposons que $n$ divise $a$ et $n$ divise $b$. \textbf{Par définition}, $n$ est un diviseur 
+        commun de $a$ et $b$:  
+        \[ n \Coloneqq dc(a,b) \]
+        \textbf{Or}, si $n$ est un diviseur commun de $a$ et $b$, \textbf{il faut} que $n$ divise le 
+        plus grand diviseur commun de $a$ et $b$, par le \textbf{\textcolor{brown}{Lemme 1}}.
+        En effet, si $n$ est bien un diviseur commun de $a$ et $b$, il y a deux cas possibles. Soit :
+        \begin{itemize}
+            \item $n$ est l'unique diviseur commun de $a$ et $b$ et donc n est est le plus grand commun diviseur 
+                de $a$ et $b$. \textbf{Par définition} : 
+                \[ n = pgcd(a,b) \]
+            \item $n$ n'est pas l'unique diviseur de $a$ et $b$ et il existe un pgcd(a,b), tel que 
+                \[ n \neq pgcd(a,b) \]
+        \end{itemize}
+        Dans le premier cas, on sait que $n$ divise le $pgcd(a,b)$, par le \textcolor{brown}{\textbf{Lemme 1}}. 
+        Dans le deuxième cas, on sait que $n$ divise $pgcd(a,b)$ puisque n'importe quel 
+        nombre $n \in \mathbb{Z^*}$ peut se diviser lui-même. \vspace{1em} \\      
+        Par conséquent, nous concluons que si $n$ divise $a$ et $n$ divise $b$, alors $n$ divise 
+        nécessairement le plus grand commun diviseur de $a$ et $b$. \qed
+    \end{Preuve*}
+        
+
+    \begin{prop}{($P^{\prime\prime}_r(a,b, n)$)}{}
+        \[ n|pgcd(a,b) \implies (n|a) \land (n|b) \]
+    \end{prop}
+
+    \begin{Preuve*}{}{}
+       Nous voulons montrer que si $n$ divise le plus grand commun diviseur de $a$ et $b$ \textbf{alors}, $n$ 
+       divise $a$ \textbf{et} $n$ divise $b$. Nous allons montrer 
+       $P^{\prime\prime}_r(a,b, n)$ par \textcolor{red}{\textit{preuve directe}}. \vspace{1em} \\
+        Supposons que $n$ divise le plus grand commun diviseur de $a$ et $b$. \textbf{Alors}, $n$ 
+        est un facteur de $pgcd(a,b)$ et il existe un entier $k \in \mathbb{Z}$ tel que 
+        $nk = pgcd(a,b)$.  \vspace{1em} \\ 
+        \textbf{Or}, s'il existe bien un nombre qui se trouve à être le plus grand commun diviseur de $a$ 
+        et $b$, $n$ est alors un facteur de $a$ tout en étant un facteur de $b$. Autrement dit, 
+        il est possible d'obtenir $a$ en multipliant $pgcd(a,b)$ par un entier $l \in \mathbb{Z}$  
+        et il est possible d'obtenir $b$ en multiple $pgcd(a,b)$ par un eniter $m \in \mathbb{Z}$. 
+        \vspace{1em} \\ 
+        Similairement, il est possible d'obtenir $a$ en multipliant $n$ par $kl$ et 
+        il est possible d'obtenir $b$ en multiplant $n$ par $km$ : 
+        \begin{align*}
+                a &= pgcd(a, b) \cdot l = nkl \\
+                b &= pgcd(a, b) \cdot m = nkm 
+        \end{align*}
+        \textbf{Par définition}, $n$ est donc un facteur de $a$ tout en étant un facteur de $b$. 
+        Ainsi, $n$ divise $a$ et $n$ divise $b$. Nous concluons que si $n$ divise $pgcd(a,b)$ 
+        $n$ divise également $a$ et $b$. 
+    \end{Preuve*}
+
+    Nous venons de montrer que la proposition $P^{\prime\prime}_q(a, b, n)$ et sa 
+    récriproche $P^{\prime\prime}_q(a, b, n)$ sont toutes deux vraies. Par la définition d'une 
+    \textit{proposition biconditionnelle}, nous concluons que la proposition :
+    \[ n|pgcd(a,b) \Leftrightarrow (n|a) \land (n|b) \]
+    est vraie. Autrement dit, $P^{\prime\prime}(a, b, n) \Coloneqq$ 
+    \textit{n divise le plus grand commun diviseur de $a$ et $b$ si et seulement si $n$ divise $a$ 
+    et $n$ divise $b$} est vraie. 
+
+    \begin{enumerate}
+        \item[5.] Montrez que $pgcd(an; bn) = n \times pgcd(a; b)$. Reformulez la proposition en langage
+        logique, puis écrivez sa preuve en explicitant chaque technique utilisée.
+        (Indice : Montrez que $n \times pgcd(a; b)$ divise $pgcd(an; bn)$. Qu’en déduisez-vous ?)
+    \end{enumerate}
+
+    Soit la proposition $P(a,b,n,d, d^{\prime})$ : $pgcd(an, bn) = n \times pgcd(a,b)$, nous 
+    pouvons réécrire $P(a,b,n,d, d^{\prime})$ en language logique de la façon suivante :
+    \begin{align*}
+        &P(a,b,n,d^{\prime})  \Coloneqq \left(d^{\prime} = pgcd(an,bn)\right) 
+        \implies \left( d = n \times pgcd(a,b) \right), \\ 
+        &a,b,n, d^{\prime} \in \mathbb{Z}
+    \end{align*} 
+    Nous allons procéder en montrant que le nombre $d^{\prime}$ divise $n \times pgcd(a,b)$ et que 
+    $n \times pgcd(a,b)$ divise le nombre $d^{\prime}$, ce qui montre que les deux expressions sont 
+    égales. Nous commençons par prouver le Lemme suivant. 
+
+    \begin{Lemme}{}{}
+        Si $a|b$ et $b|a$, \textbf{alors}, $a = b$ ou $a = -b$, pour tout $a, b \in \mathbb{Z}$   
+    \end{Lemme}                 
+    \begin{Preuve*}{}{}
+        Nous procédons par \textcolor{red}{\textit{preuve directe}}. Supposons que $a|b$ et $b|a$. 
+        Alors, il existe des entiers $k$ et $l \in \mathbb{Z}$ tels que 
+        $ak = b$ et $bl = a$. Donc nous avons : 
+        \begin{align*}
+            a &= bl \\
+                  &= (ak) \cdot l\\
+                  &= akl\\
+        \end{align*}
+        Et donc, nous avons également :
+        \begin{align*}
+            a - akl = 0 \\ 
+            a(1 -kl) = 0 \\ 
+            1 - kl = 0 \\ 
+            1 = kl
+        \end{align*}
+        Sachant que $k$ et $l$ appartiennent à $\mathbb{Z}$, les seuls nombres qui satisfont la dernière égalité 
+        est $k = l = 1$ ou $k = l = -1$. 
+        \begin{itemize}
+            \item Si  $k = l = 1$, $a = bl = b \cdot 1 = b$. Et $b = ak = a \cdot 1 = a$
+            \item Si  $k = l = -1$, $a = bl = b \cdot -1 = -b$. Et $b = ak = a \cdot -1 = -a$
+        \end{itemize}
+        Donc, nous concluons que si $a|b$ et $b|a$, il s'ensuit que $a = b$ ou $a = -b$. \qed
+    \end{Preuve*}
+        Le corollaire de ce lemme est 
+        que si nous considérons uniquement des entiers $a, b, k, l \in \mathbb{N}$, 
+        $a|b$ et $b|a$ implique que $a = b$. Par ailleurs, nous pouvons faire 
+        ce saut logique, puisque le problème implique la notion de pgdc qui, par définition, 
+        est un entier positif. 
+    \begin{Lemme}{}{}
+        Si $a|b$ et $b|a$, \textbf{alors}, $a = b$, pour tous $a, b \in \mathbb{N}$   
+    \end{Lemme}
+    Avant de montrer $P(a,b,n, d^{\prime})$, nous introduisons un autre Lemme qui nous permettra de 
+    résoudre le problème. 
+    \begin{Lemme}{}{}
+        Si $a|c$ et $b|c$ et $pgcd(a,b)$, \textbf{alors}, $ab|c$    
+    \end{Lemme}
+    \begin{Preuve*}{}{}
+        Supposons que $a|c$ et $b|c$ et $pgcd(a,b) = 1$. Alors, il existe des entiers $k$ et $l$ formant 
+        une combinaison linéaire de $a$ et $b$ égale à $1$ ; $ak + bl = 1$ 
+        (Conséquence du \textbf{Théorème de Bézout}). \textbf{Par conséquent} $cak + cbl = c$ :
+        \begin{align*}
+                    ak + bl &=  1 \\ 
+                    c(ak + bl) &= 1 \cdot c \\ 
+                    cak + cbl &= c 
+        \end{align*}
+        Par ailleurs, puisque $a|c$ et $b|c$, doit exister des entiers $m$ et $p$ $\in \mathbb{Z}$ 
+        tels que \textcolor{myg}{$c = ma$} et \textcolor{myp}{$c = pb$}.  
+        Nous avons donc $\textcolor{myp}{(pb)}ak + \textcolor{myg}{(ma)}bl = c$ : 
+        \begin{align}
+                \nonumber (pb)ak + (ma)bl = c \\  
+                \nonumber pbak + mabl = c \\  
+                \nonumber ab(pb) + ab(ml) = c \\  
+                ab(pb + ml) = c  
+        \end{align}
+        Puisque $ab$ divise le côté gauche de l'équation (1.6) ($ab|ab(pb +ml)$), $ab$ divise nécessairement 
+        le côté droit de l'équation, c'est-à-dire $c$. 
+        Nous venons de montrer que si $a|c$ et $b|c$ et $pgcd(a,b) = 1$, \textbf{alors}
+        $ab|c$. \qed
+    \end{Preuve*}
+    Nous avons prouvé le \textcolor{brown}{\textbf{Lemme 4}} en supposant que $pgcd(a,b) = 1$. Cependant, même 
+    si le $pgcd$ de $a$ et $b$ n'est pas 1, nous pouvons toujours trouver un entier $n$ tel que 
+    $abn = c$, car $c$ est une multiple de $a$ et $b$. Donc si $a|c$ et $b|c$, même si 
+    $pgcd(a,b) \neq 1$, $ab$ divisera $c$.  
+    \begin{Lemme}{}{}
+        Si $a|c$ et $b|c$, \textbf{alors}, $ab|c$    
+    \end{Lemme}
+
+
+
+
+    \begin{prop}{($P_q(a,b, n, d^{\prime})$)}{}
+    \begin{align*}
+             d^{\prime} = pgcd(an, bn) \implies d^{\prime} \text{ \textbf{divise} } n \times pgcd(a,b),
+             \\ a, b, n, d^{\prime} \in \mathbb{N} 
+    \end{align*}       
+    \end{prop}
+    
+    \begin{Preuve*}{}{}
+        Nous procédons par \textcolor{red}{\textit{preuve directe}}. Supposons que $d^{\prime}$ est le 
+        plus grand commun diviseur de $an$ et $bn$, pour $an$ et $bn \in \mathbb{N}$ ; $d^{\prime} = pgcd(an, bn)$ 
+        . Et soit $d = pgcd(a,b)$ Alors, nous savons que \textcolor{myb}{$d^{\prime}$ divise toutes les 
+        \textbf{combinaisons linéaires} de $an$ et $bn$}, \textbf{par la définition d'un $pgcd$}.
+        Si $d$ est effectivement le $pgcd(a,b)$, alors $d$ est une combinaison linéaire de $a$ et $b$, 
+        par le théorème de Bézout. Autrement dit, $d = ax + by = pgcd(a,b)$. En multipliant 
+        cette combinaison linéaire ($d$) par $n$, on obtient l'équation $nd = n \times pgcd(a,b) = n(ax + by)$
+        Et on peut l'expandre en \textcolor{myb}{$nd = nax + nbx$}. Cette dernière équation est simplement 
+        une combinaison linéaire de $an$ et $bn$. 
+        \begin{align*}
+            d = pgcd(a,b) &= ax + by &\text{(Bézout)} \\ 
+            n \times d &=  n(ax + by) \\ 
+            n \times d &= nax + nby \\
+            n \times d &= (an)x + (bn)y 
+        \end{align*}
+        Puisque $d^{\prime}$ divise toutes les combinaisons linéaire de $an$ et $bn$ et que 
+        $nd$ est peut être reformulé en combinaison linéaire de $an$ et $bn$, nous concluons que 
+        $d^{\prime}$ divise $nd$. Autrement dit, $pgcd(an ,bn)$ divise $n \times pgcd(a,b)$ 
+    \end{Preuve*}
+
+    \begin{prop}{($P_r(a,b, n, d^{\prime})$)}{}
+    \begin{align*}
+             d = n \times pgcd(a, b) \implies \text{ \textbf{divise} } pgcd(an, bn),
+             \\ a, b, n, d \in \mathbb{N} 
+    \end{align*}       
+    \end{prop}
+
+
+    \begin{Preuve*}{}{}
+        Nous procédons par \textcolor{red}{\textit{preuve directe}}. Supposons que  $d$ est le 
+        plus grand commun diviseur de $a$ et $b$, pour $a$ et $b$ $\in \mathbb{N}$. Et soit 
+        $d^{\prime} = pgcd(an, bn)$. Alors, $d^{\prime}$ est une combinaison linéaire de 
+        $an$ et $bn$. 
+        et nous pouvons exprimer $d^{\prime}$ comme suit  $ d = anx + bny$ ou 
+        \textcolor{myp}{$n(ax + by$)}.  Aisi, nous savons que $n$ divise $d^{\prime} = n(ax + by)$ \vspace{1em}. \\ 
+
+        Prouvons maintenant que $d$ divise $d^{\prime}$. Par définition, $d$ divise 
+        toutes les combinaisons linéaire de $a$ et $b$. Donc, $d$  divise un combinaison linéaire telle que 
+        $ax + by$. En multipliant cette combinaison linéaire par $n$, on obtient $a(nx) + b(nx)$, ce qui est 
+        aussi une combinaison linéaire de $a$ et $b$. Or, nous avons dit que $d^{\prime}$ peut être 
+        reformulé en \textcolor{myp}{$n(ax + by)$} $ = a(nx) + b(nx)$, qui est toujours 
+        une combinaison linéaire de $a$ et $b$. Ainsi, nous concluons que $d$ divise $d^{\prime}$. \vspace{1em} \\ 
+        Nous avons montré que $n$ divise $d^{\prime}$ et que $d$ divise $d^{\prime}$. 
+        Par le \textbf{\textcolor{brown}{Lemme 5}}, le produit $nd$ divise donc $d^{\prime}$. \qed   
+    \end{Preuve*}
+
+
+    En montrant, $P_q(a,b, n, d^{\prime})$ et $P_r(a,b, n, d^{\prime})$, nous avons montré que 
+    $pgcd(an, bn)$ divise $n\times pgcd(a,b)$ et que $n \times pgcd(a, b)$ divise $pgcd(an, bn)$. 
+    Par le \textbf{\textcolor{brown}{Lemme 3}}, nous concluons donc que $P(a,b,n, d^{\prime})$ tient. 
+    Autrement dit : 
+    \[ pgcd(an, bn) =  n \times pgcd(a, b) \]
+    parce que 
+    \begin{itemize}
+        \item $pgcd(an, bn) \textbf{ divise }  n\times pgcd(a,n)$ \textbf{et} \\ 
+        \item $n\times pgcd(a,n) \textbf{ divise } pgcd(an, bn)$
+    \end{itemize}
+    \qed
+\end{multicols*}
+  
+
+
+\end{document}

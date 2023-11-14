@@ -1,4 +1,5 @@
 \usepackage[french]{babel}
+
 % Permet d'ajuster la taille des marges et de la distance pour les footer
 \usepackage[tmargin=2cm,rmargin=0.4in,lmargin=0.4in,bmargin=2cm,footskip=.5in]{geometry}
 
@@ -22,7 +23,7 @@
 \usepackage{balance}
 \usepackage{dirtree}
 \usepackage{titlesec}
-\usepackage{blkarray}
+
 
 
 
@@ -120,6 +121,7 @@ picture]{%
 
 %==========================================================================================
 \usepackage{libris} 
+\usepackage{etoolbox}
 \usepackage[export]{adjustbox}% for positioning figures
 
 \makeatletter
@@ -154,6 +156,7 @@ picture]{%
 \usepackage{xcolor}
 \usepackage{varwidth}
 \usepackage{varwidth}
+\usepackage{etoolbox}
 %\usepackage{authblk}
 \usepackage{nameref}
 \usepackage{multicol,array}
@@ -173,6 +176,7 @@ picture]{%
   columns=fullflexible,
   keepspaces=true
 }
+\usepackage{caption}
 \usepackage{float} % Pour forcer les images au bon endroit
 
 
@@ -1080,4 +1084,42 @@ segmentation style={solid, mytheoremfr},
 }
 {th}
 
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{Prop}{Proposition}
+{%
+	enhanced,
+	breakable,
+	colback = mypropbg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mypropfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mypropfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mypropfr},
+}
+{th}
 
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=chapter]{prop}{Proposition}
+{%
+	enhanced,
+	breakable,
+	colback = mypropbg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mypropfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mypropfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mypropfr},
+}
+{th}
