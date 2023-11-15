@@ -442,8 +442,94 @@
         \item $n\times pgcd(a,n) \textbf{ divise } pgcd(an, bn)$
     \end{itemize}
     \qed
-\end{multicols*}
-  
+
+    \section*{Problème 1 $\quad$ $\cdot$  $\quad$ Sierpaskal}
+    
+
+    \begin{enumerate}
+        \item Rappelez la définition récursive de $i \choose j$.  
+    \end{enumerate}
+
+    \begin{figure}[H]
+                \[
+                \begin{array}{ccccccccccccc}
+                 & & & & & 1 & & & & & \\
+                 & & & & 1 & & 1 & & & & \\
+                 & & & 1 & & 2 & & 1 & & & \\
+                 & & 1 & & 3 & & 3 & & 1 & & \\
+                 & 1 & & 4 & & 6 & & 4 & & 1 & \\
+                1 & & 5 & & 10 & & 10 & & 5 & & 1 \\
+                \end{array}
+                \]
+    \caption{Triangle de Pascal }
+    \end{figure}
+
+    \begin{figure}[H]
+\[
+        \begin{array}{ccccccccccccccccc}
+         & & & & & & & \binom{0}{0} & & & & & & & & \\
+         & & & & & & \binom{1}{0} & & \binom{1}{1} & & & & & & & \\
+         & & & & & \binom{2}{0} & & \binom{2}{1} & & \binom{2}{2} & & & & & & \\
+         & & & & \binom{3}{0} & & \binom{3}{1} & & \binom{3}{2} & & \binom{3}{3} & & & & & \\
+         & & & \binom{4}{0} & & \binom{4}{1} & & \binom{4}{2} & & \binom{4}{3} & & \binom{4}{4} & & & & \\
+         & & \binom{5}{0} & & \binom{5}{1} & & \binom{5}{2} & & \binom{5}{3} & & \binom{5}{4} & & \binom{5}{5} & & & \\
+        \end{array}
+\]
+    \caption{Représentation du Triangle de Pascal}
+    \end{figure}
+
+    \begin{Concept*}{}{}
+     En observant le Triangle de Pascal, on observe deux \textbf{cas extrêmes}. Le premier cas 
+    est lorsque $n \choose k$ est tel que $n \choose 0$; Il s'agit de chacune des premières entrées 
+    du triangle à la rangée $n$ (considérant qu'il existe une rangée 0). Le Le second cas 
+    est lorsque $n \choose k$ est tel que $n \choose n$ et donc $k = n$. Il s'agit de chacune des 
+    dernières entrées du triangle à la rangé $n$.        
+    \end{Concept*}
 
 
-\end{document}
+    \begin{note}{}{}
+        \textbf{Par définition}, 
+        $n \choose 0$ est \textbf{le nombre} de sous-ensemble de longueur $0$ il est possible
+        de former en sélectionnant 
+        $0$ élément d'un ensemble de longueur $n$. Dans ces conditions,
+        \textbf{on peut seulement former l'ensemble vide},
+        $\emptyset$, et ce \textbf{nombre} est donc $1$. 
+        Par ailleurs, $n \choose n$ est le \textbf{nombre} de sous-ensemble de longueur $n$ il est possible d'obtenir 
+        en sélectionnant $n$ éléments d'un ensemble de $n$ éléments. \textbf{Le seul sous-ensemble 
+        possible selon ses conditions} est l'ensemble original de $n$ élément, et le nombre 
+        $n \choose n$ est donc égale à $1$. 
+    \end{note}
+
+    Nous postulons alors que les \textbf{cas extrêmes} du triangle de Pascal sont de bon candidat pour 
+    des \textbf{cas de base} d'une définition récursive. Considérons alors la définition partielle suivante. 
+    \begin{Definitionx}{Cas de base de $C(n, k)$}{}
+       $n \choose k$ $\Coloneqq$ $n \choose 0$ $= 1$ \textbf{et} $n \choose n$ $= 1$      
+    \end{Definitionx}
+
+    D'après le triangle de Pascal, nous savons que chaque entré à la rangée $n$ est égal à 
+    l'entrée à la somme de la $k-1$\textit{-ième} entrée à la rangé $n-1$ et de la \textit{$k$-ième} entrée 
+    à la rangée $n-1$.
+    Autrement, dit 
+    
+    \begin{Definitionx}{Cas constructeur $C(n, k)$}{}
+        \begin{center}
+        $n \choose k$ =  $n-1 \choose k-1$ + $n -1 \choose k$, $k \neq n$, $k \neq 0$ 
+        \end{center}        
+    \end{Definitionx}
+
+\begin{Definition}{}{}
+    Le nombre \( C(n, k) \) est défini comme suit :
+    \begin{align*}
+            C(n, k) \Coloneqq
+            \begin{cases}
+                1 & \text{si } k = 0 \textbf{ ou } \\ 
+                  & \text{si } k = n, \\
+                C(n-1, k-1) + C(n-1, k) & \text{si } 0 < k < n.
+            \end{cases}             
+    \end{align*}
+    
+\end{Definition}
+
+\end{multicols*}  
+
+\end{document} 
