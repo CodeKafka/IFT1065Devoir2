@@ -34,7 +34,7 @@
 
 \pagebreak
 \begin{multicols*}{2}
-
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
 
     \chapter{Résolution de problèmes}
 
@@ -526,10 +526,191 @@
                   & \text{si } k = n, \\
                 C(n-1, k-1) + C(n-1, k) & \text{si } 0 < k < n.
             \end{cases}             
-    \end{align*}
-    
+    \end{align*}    
 \end{Definition}
 
+    \begin{enumerate}
+        \item Montrez que pour tous naturels n et m et tout entier k, 
+            \begin{center}
+            $ \sum_{j=0}^{k}$ $m \choose k-j$ $n \choose j$ $=$ $m+n \choose k$.  
+            \end{center}
+        Commencez par reformuler la proposition en langage logique. Faites-en ensuite
+        une preuve par induction mathématique sur la valeur de n.
+    \end{enumerate}
+
+    Nous devons prouver la prosition suivante : 
+
+    \begin{prop}{$\left(P(j, k , m,  n)\right)$}{}
+    \begin{align*}
+        \forall n, m \in \mathbb{N}, k \in \mathbb{Z},&
+             \\ 
+                         &\sum_{j=0}^{k} {m \choose k-j} {n \choose j} = {m+n \choose k}
+    \end{align*}       
+    \end{prop}
+
+    \begin{Preuve*}{}{}
+        Nous allons montrer $P(j, k, m, n)$ par \textit{\textcolor{red}{induction mathématique}}.   
+
+        \paragraph{}
+        Notre preuve par induction commencer en vérifiant la validité de la proposition pour 
+        une valeur de base de $n$. Nous expliquons pourquoi $n$ (plutôt que $j$ ou $k$ ou $m$) 
+        limite le cas de base. \vspace{1em} \\ 
+        \underline{\textbf{Cas de base (n = 0)}}\\
+        Lorsque $\textcolor{myb}{n = 0}$, la somme $\sum_{j=0}^{k}{m \choose k-j}{0 \choose j}$ 
+        présente trois scénarios. \\ 
+        \begin{enumerate}
+            \item \textit{\textcolor{red}{Si}} $\textcolor{red}{j > 0}$,
+        \end{enumerate}
+         \textbf{alors} la somme devient simplement 
+        \[ \sum_{j=0}^{k} R \times {\textcolor{myb}{0} \choose \textcolor{red}{j}} = 
+        \sum_{j=0}^{k}R \times 0 = \textcolor{myg}{0}\]
+        puisque le nombre \textcolor{myg}{le nombre de sous-ensemble} de longeur \textcolor{red}{$j > 0$}
+        il est possible d'obtenir en sélectionnant \textcolor{red}{$j > 0$} éléments 
+        d'un ensemble de $\textcolor{myb}{0}$  élément est $\textcolor{myg}{0}$. En considérant 
+        les termes de gauches et les termes de droite de la proposition, 
+        nous avons : 
+        \[ \sum_{j=0}^{k} {m \choose k - j}{\textcolor{myb}{0} \choose \textcolor{red}{j}} = 0 
+        = {m + \textcolor{myb}{0} \choose k} \]
+        Puisque le terme de gauche de la proposition $P(j,k,m,n)$ est égal à zéro, 
+        le terme de droite doit nécessairement être égal à zéro, et la proposition 
+        tient donc pour le cas de base $\textcolor{myb}{n = 0}$ pour tout $\textcolor{red}{j > 0}$. 
+
+        \begin{enumerate}
+            \item[2.] \textit{\textcolor{red}{Si j = 0}},               
+        \end{enumerate}
+        \textbf{alors} la somme devient simplement   
+        \[ \sum_{j=0}^{k} {m \choose k - \textcolor{red}{0}} \times 
+            {\textcolor{myb}{0} \choose \textcolor{red}{0}} = 
+        \sum_{j=0}^{k} {m \choose k} \times 1 \]
+        puisque le nombre \textcolor{myg}{le nombre de sous-ensemble} de longeur \textcolor{red}{$j = 0$}
+        il est possible d'obtenir en sélectionnant \textcolor{red}{$j = 0$} éléments 
+        d'un ensemble de $\textcolor{myb}{0}$  élément est $\textcolor{myg}{0}$. En considérant 
+        les termes de gauches et les termes de droite de la proposition, 
+        nous avons : 
+        \[ \sum_{j=0}^{k} {m \choose k - \textcolor{red}{j}}{\textcolor{myb}{0} \choose \textcolor{red}{0}} 
+            =  {m + \textcolor{myb}{0} \choose k} \times 1  
+        = {m + \textcolor{myb}{n} \choose k} \]
+        la proposition tient donc pour le cas de base $\textcolor{myb}{n = 0}$ lorsque $\textcolor{red}{j = 0}$.
+        \begin{enumerate}
+            \item[3.] \textit{\textcolor{red}{Si}} $\textcolor{red}{j < 0}$,
+        \end{enumerate}
+        \textbf{alors}, similairement au cas 1, la somme est égale à $0$
+        puisque le nombre \textcolor{myg}{le nombre de sous-ensemble} de longeur \textbf{négative}   
+        \textcolor{red}{$j < 0$}
+        il est possible d'obtenir en sélectionnant \textcolor{red}{$j < 0$} éléments 
+        d'un ensemble de $\textcolor{myb}{0}$  élément est $\textcolor{myg}{0}$. 
+        \begin{note}{}{}
+        Par définition, un 
+        ensemble ne peut pas être de cardinal négatif et le plus petit ensemble possible 
+        est l'ensemble vide, $\emptyset$. 
+        \end{note}  
+        Puisque le côté gauche de la proposition (la sommation) est zéro le côté droit 
+        de la proposition doit nécessairement être zéro et le proposition tient donc pour les cas 
+        de base $\textcolor{myb}{n = 0}$ et pour tout $j \leq 0$.
+        \begin{note}{}{}
+            Nous aurions pu omettre de montrer que la proposition tient pour le cas de base 
+            $\textcolor{myb}{n = 0}$ et les $\textcolor{red}{j < 0}$, puisque la sommation 
+            débute à $j = 0$. 
+        \end{note}
+       
+        \textbf{Nous venons de montrer que le cas de base est $n = 0$} Peu importe la valeur 
+        du paramètre $j$ de la sommation, l'égalité donné par $P(j, k, m, n)$ tient pour 
+        le cas de base $n = 0$. 
+        \vspace{1em} \\ 
+        \underline{\textbf{Hypothèse d'induction}}\\
+        Supposons que 
+        $\sum_{j=0}^{k} {m \choose k-j} {n \choose j} = {m+n \choose k}$ est vrai
+        pour un certain entier naturel $n$. Nous devons prouver 
+        que le fait que la proposition tient pour $n$ implique que la proposition tient 
+        pour $\textcolor{myp}{n+1}$. 
+        \[\scalemath{0.8}{\sum_{j=0}^{k} {m \choose k-j} {n \choose j} = {m+n \choose k} \implies 
+        \sum_{j=0}^{k} {m \choose k-j} {\textcolor{myp}{n+1}   \choose j} = {m+ \textcolor{myp}{n+1}\choose k}}\]
+
+        \underline{\textbf{Cas n+1}}\\
+        Nous devons montrer que l'égalité suivante est vraie (en supposant qu'elle est vraie pour $n$)
+        \begin{align}
+            \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} {\textcolor{myp}{n+1} \choose j} = {m+ \textcolor{myp}{n+1}\choose k}
+        \end{align}
+        Selon le Triangle de Pascal (\S Hammack 4.6), 
+        \begin{align}
+            {\textcolor{myp}{n+1} \choose j} = \textcolor{red}{{n \choose j - 1} + {n \choose j}}
+        \end{align}
+        Nous pouvons donc réécrire la sommation de (1.7) comme suit :
+        \begin{align*}
+            \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} \times
+                \left( \textcolor{red}{{n \choose j - 1} + {n \choose j}} \right)
+        \end{align*}
+        En calculant le produit, nous pouvons séparer l'équation en deux sommations :
+        \begin{align}
+            \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} \times \textcolor{red}{{n \choose j - 1}} 
+            \quad + \quad \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} \times {n \choose j}
+        \end{align}
+        \textbf{Par l'hypothèse inductive}, la seconde expression de (1.9),
+        $\sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} \times {n \choose j}$, est simplement $m + n \choose k$. 
+        Nous avons donc 
+        \begin{align}
+            \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}}\textcolor{red}{{n \choose j - 1}} 
+            \quad + \quad {m + n \choose k}
+        \end{align}
+        Nous allons maintenant reformuler la première expression de (1.9). Notons d'abord que 
+        $j = 0$, la somme partielle de (1.9) est $0$ puisque : 
+        \begin{align*}
+            \textcolor{myb}{{m \choose k-j}}\textcolor{red}{{n \choose 0 - 1}} &=  
+            \textcolor{myb}{{m \choose k-j}}\textcolor{red}{{n \choose - 1}} \\ &=
+            \textcolor{myb}{{m \choose k-j}} \times \textcolor{red}{0} \\ &= 0 
+        \end{align*}
+
+        Par conséquent, nous pouvons commencer la sommation à l'index $j = 1$ puisque 
+        l'index $j = 0$ ne contribue pas à la somme.
+        \begin{align*}
+            \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}}\textcolor{red}{{n \choose j - 1}} 
+             \\ 
+            \Updownarrow \quad\quad\quad\quad\quad 
+             \\
+             \sum_{\textcolor{orange}{j = 1}}^{k} \textcolor{myb}{{m \choose k-j}}\textcolor{red}{{n \choose j - 1}} 
+        \end{align*}
+        Considérons un entier $i \in \mathbb{N}, \textcolor{brown}{i = j - 1}$. Nous allons présenter 
+        une sommation équivalente en utilisant $i$. Puisque lorsque $j = 1, i = j - 1 = 0$. Et lorsque 
+        $j = k, i = j - 1 = j - k$. Nous avons donc la sommation suivante. 
+        \begin{align*}
+             \sum_{\textcolor{orange}{j = 1}}^{k} \textcolor{myb}{{m \choose k-j}}\textcolor{red}{{n \choose j - 1}} 
+             \\ 
+            \Updownarrow \quad\quad\quad\quad\quad\quad 
+             \\
+             \sum_{\textcolor{brown}{i = 0}}^{\textcolor{brown}{k-1}} 
+             \textcolor{myb}{{m \choose k-(\textcolor{brown}{i-1})}}\textcolor{red}{{n \choose (\textcolor{brown}{i+1})   - 1}} 
+             \\ 
+            \Updownarrow \quad\quad\quad\quad\quad\quad
+             \\
+             \sum_{\textcolor{brown}{i = 0}}^{\textcolor{brown}{k-1}} 
+             \textcolor{myb}{{m \choose (k-\textcolor{brown}{1})\textcolor{brown}{-i}}}\textcolor{red}{{n \choose \textcolor{brown}{i}}} 
+        \end{align*}
+
+        Cette dernière équation a la même forme que l'hypothèse d'induction avec 
+        $k - 1$ plutôt que $k$.  Par l'hypothèse d'induction, nous pouvons donc déduire : 
+
+        \begin{align}    
+             \sum_{\textcolor{brown}{i = 0}}^{\textcolor{brown}{k-1}} 
+             \textcolor{myb}{{m \choose (k-\textcolor{brown}{1})\textcolor{brown}{-i}}}\textcolor{red}{{n \choose \textcolor{brown}{i}}}
+             = {m+n \choose k - 1}
+        \end{align}
+        En combinant (1.7), (1.10). (1.11), nous avons : 
+
+        \begin{align}
+            \sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} {\textcolor{myp}{n+1} \choose j} = {m + n \choose n - k} 
+            + {m+n \choose k}
+        \end{align}
+
+
+        Selon le Triangle de Pascal, nous avons alors 
+
+            $\sum_{j=0}^{k} \textcolor{myb}{{m \choose k-j}} {\textcolor{myp}{n+1} \choose j} = {m + n \choose n - k} 
+            + {m+n \choose k} = {m+n+1 \choose k}$ Nous venons donc de montrer que la proposition tient 
+            également pour le cas $n+1$ Ainsi, par induction mathématique, nous concluons que $P(j,k,m, n)$ est vraie. 
+            Autrement dit, pour tout naturels $n, m$ et tout entier $m$, l'égalité 
+                \[ \sum_{j=0}^{k} {m \choose k-j} {n \choose j} = {m+n \choose k} \]
+            est vraie. \qed 
+        \end{Preuve*}
 \end{multicols*}  
 
 \end{document} 
