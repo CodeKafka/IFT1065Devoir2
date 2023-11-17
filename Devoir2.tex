@@ -711,6 +711,238 @@
                 \[ \sum_{j=0}^{k} {m \choose k-j} {n \choose j} = {m+n \choose k} \]
             est vraie. \qed 
         \end{Preuve*}
-\end{multicols*}  
+        
+        \columnbreak
+        \begin{enumerate}
+            \item Démontrez, en utilisant l’identité de la question (2.), que pour tous naturels $k$ et $i$ 
+                et tout entier $j$, 
+                \[ P(i, j) = P(2^k +i, j) = P(2^k +i, 2^k +j) \]
+        \end{enumerate}
+        Nous allons d'abord reformuler l'identité pour l'exprimer en termes de variables 
+        adaptées pour la démonstration qui suit. Pour tout naturel $i = m, 2^k = n, j = k$, 
+        
+        \begin{align}
+            \textcolor{myp}{\sum_{r=0}^{j} {i \choose j-r} {2^k \choose r}} = {i + 2^k   \choose j}
+        \end{align}
+        Nous avons deux égalités à prouver. Nous allons les prouver une à la fois. 
+        Considérons la proposition suivante.  
+
+    \begin{prop}{($P$)}{}
+        \[ P(i, j) = P(2^k +i, j) \]
+    \end{prop}
+    
+        \begin{Preuve*}{}{}
+            Nous devons montrer que l'égalité donnée par $P$ tient. Nous allons procéder 
+            par \textcolor{red}{\textit{preuve directe}}. 
+            \vspace{1em} \\ 
+            Supposons que l'égalité de la proposition (1.9) est vraie. 
+            Le terme de droite de $P$ peut être réécrit comme suit, en utilisant 
+            la version adapté de l'identité (équation 1.13) : 
+            \begin{align*}
+                P(2^k + i, j)    &= P(i + 2^k, j) 
+                                \quad\quad\quad\quad\quad\quad \text{ Inversion de l'ordre } 
+                                \\
+                                &={i + 2^k \choose j} \text{ mod } 2 \text{ \quad\quad\quad\quad\quad\quad\; 
+                Def.  de P(i, j)} 
+                \\ 
+                              &= \textcolor{myp}{\left( \sum_{r=0}^{j} {i \choose j-r} {2^k \choose r} \right)}
+                              \text{ mod } 2 \quad\quad\quad 
+                              \text{Selon (1.13)}
+            \end{align*}
+            On a donc à prouver que 
+            \[ P(i, j) = \sum_{r=0}^{j} {i \choose j-r} {2^k \choose r} \text{ mod } 2   \]
+            Commençons par observer que si un nombre $c$ divise une nombre $a$ ou 
+            $c$ divise un nombre $b$, alors $c$ divise nécessairement le produit 
+            $ab$   
+            \begin{Lemme}{}{}
+                \begin{align*}
+                            (c|a) \lor (c|b) \implies c|ab
+                \end{align*}
+            \end{Lemme}   
+            \paragraph{}
+            Montrons que le Lemme 6 est vrai avec une \textit{\textcolor{red}{Preuve par cas}}. 
+            Supposons que la prémisse du Lemme 6 est vraie. Nous faisons alors face 
+            aux deux cas suivants.
+            \columnbreak
+
+            \underline{\textbf{Cas  $c | a $}} \vspace{1em} \\ 
+            Dans ce cas, il existe un $r \in \mathbb{Z}$ tel que $a = rc$ et affirmer que 
+            $c | ab$ revient à affirmer que $c |(rc)b$. Or, puisque $ab$ est manifestement 
+            un multiple de $c$ (sachant que $ab = (rc)b = c(rb)$), il s'ensuit que 
+            $c$ divise $ab$. 
+            \vspace{1em} \\
+            \underline{\textbf{Cas  $c | b $}} \vspace{1em} \\ 
+            Sans perte de généralité, on peut montrer avec un raisonnement similaire au  
+            premier cas que $c | ab$ lorsque $c|b$. 
+            \vspace{1em} \\ 
+            Dans les deux cas, $c|ab$, et nous avons montré que si $c|a$ ou $c|b$, alors 
+            $c$ divise nécessairement $ab$ Nous concluons alors que le Lemme 6 est vrai. \qed
+            
+            \paragraph{}
+            Un \textbf{corollaire} du \textbf{\textcolor{brown}{Lemme 6}} est que si $2$ divise 
+            une des expressions $a = {i \choose j - r}$ ou $b = {2^k \choose j}$ de 
+            la sommation $\sum_{r=0}^{j} {i \choose j - r} {2^k \choose j}$ pour 
+            toutes les valeurs possible de $r$, 
+            alors $2$ divise le produit $ab$ de cette sommation. 
+            \vspace{1em} \\ 
+            \underline{\textbf{Investigation de $\sum_{r=0}^{j} {i \choose j - r} {2^k \choose j}$}}
+            \vspace{1em} \\ 
+            Pour toutes les valeurs de $r$, sauf $r = 0$, le coefficient binomial ${2^k \choose r}$ 
+            sera un multiple de $2$. Par conséquent le coefficient
+            ${2^k \choose j}$ sera divisible par $2$ et, 
+            par le \textbf{\textcolor{brown}{Lemme 6}} le produit, ${i \choose j -r}{2^k \choose j}$
+            sera divisible par $2$. Donc, pour tous les termes $r > 0$ de la sommation, 
+            leur contribution au modulo $2$ sera nulle 
+
+
+            Lorsque $r = 0$ on a alors ${2^k \choose 0}$ et ce nombre est toujours un, peu importe la 
+            valeur de $k$. L'expression de sommation devient alors 
+
+       \begin{align}
+              \sum_{r=0}^{\textcolor{myb}{r=0}} {i \choose j - \textcolor{myb}{0}} {2^k \choose \textcolor{myb}{0}} = 
+              {i \choose j} \times 1  = {i \choose j}
+       \end{align}
+
+            Nous venons de montrer que lorsque $r = 0$, nous avons la sommation :  
+              \begin{align*}
+                  \left( \sum_{r=0}^{r=0} {i \choose j-r} {2^k \choose r} \right) \text{ mod 2}
+                  = {i \choose j} \text{ mod 2}
+            \end{align*}  
+
+            Nous venons de montrer que pour toutes autres valeurs de $r$, 
+            nous avons la sommation:  
+              \begin{align*}
+                  \left( \sum_{r=1}^{j} {i \choose j-r} {2^k \choose r} \right) \text{ mod 2}
+                  = 0  
+            \end{align*}  
+            \vspace{1em} \\ 
+            \textbf{Or},   
+              \begin{align*}
+                  \textcolor{myp}{\left( \sum_{r=0}^{j} {i \choose j-r} {2^k \choose r} \right)} \text{ mod 2}
+         = &\sum_{r=0}^{\textcolor{myb}{r=0}} {i \choose j - \textcolor{myb}{0}} {2^k \choose \textcolor{myb}{0}} 
+         \text{ mod 2} \\ + \\ 
+           &\sum_{r=1}^{j} {i \choose j-r} {2^k \choose r} \text{ mod 2 } \\ \\ 
+         = &{i \choose j}\text{ mod 2} + 0\\   \\ 
+         = &{i \choose j} \text{mod 2} \\ 
+         \textbf{Par définition}\text{,} = &\textcolor{red}{P(i, j)}
+            \end{align*} 
+        Ainsi, la proposition (1.9) est vraie ; $P(i,j) = P(2^k +i, j) = {i \choose j} \text{ mod 2}$ \qed
+        \end{Preuve*}
+        Nous continuous la preuve en montrant que la seconde proposition est également vraie. 
+        Considérez la proposition suivante 
+        \begin{prop}{($Q$)}{}
+            \[ P(i, j) = P(2^k +i, 2^k + j) \]
+        \end{prop}
+        \begin{Preuve*}{}{}
+            Nous devons montrer que l'égalité donnée par $Q$ tient. Nous allons procéder 
+            par \textcolor{red}{\textit{preuve directe}}. 
+            \vspace{1em} \\ 
+            Supposons que l'égalité de la proposition (1.10) est vraie. 
+            Le terme de droite de $Q$ peut être réécrit comme suit, en utilisant 
+            la version adapté de l'identité (équation 1.13) : 
+            \begin{align*}
+                P(2^k + i, 2^k + j)    &= P(i + 2^k, j + 2^k) 
+                                \quad\quad\text{ Inversion de l'ordre } 
+                                \\
+                                &={i + 2^k \choose j + 2^k} \text{ mod } 2 \text{\;\quad\quad\quad\quad\; 
+                Def.  de P(i, j)} 
+                \\ 
+                              &= \textcolor{myp}{\left( \sum_{r=0}^{j+2^k} 
+                              {i \choose (j + 2^k)-r} {2^k \choose r} \right)}
+                              \text{ mod } 2
+            \end{align*} 
+            \underline{\textbf{Investigation de $\sum_{r=0}^{j+2^k} {i \choose j + 2^k- r} {2^k \choose j}$}}
+            \vspace{1em} \\ 
+        Pour toutes les valeurs de $r$ y compris 
+        $r = j$, et sauf $r= 2^k$, le coefficient binomial ${2^k \choose r}$ sera divisible 
+        par $2$ et donc les $r \neq 2^k$ derniers termes de la sommation auront une contribution 
+        nulle au modulo $2$. 
+
+        Lorsque $r = 2^k$, on a alors ${2^k \choose 2^k}$ pour l'une des experession de la sommation 
+        et nous pouvons la simplifier comme suit :
+       \begin{align}
+              \sum_{r=0}^{\textcolor{myb}{r=2^k}} {i \choose j + 2^k - \textcolor{myb}{2^k}} {2^k \choose \textcolor{myb}
+              {2^k}} = 
+              {i \choose j} \times 1  = {i \choose j}
+       \end{align}
+            \textbf{Or},
+              \begin{align*}
+               \scalemath{0.8}{
+                  \textcolor{myp}{\left( \sum_{r=0}^{j + 2^k} {i \choose j + 2^k-r} 
+              {2^k \choose r} \right)} \text{ mod 2}}
+         = &\sum_{r=0}^{\textcolor{myb}{r=j-1}} {i \choose j + 2^k- \textcolor{myb}{r}} {2^k \choose \textcolor{myb}{r}} 
+         \text{ mod 2} \\ + \\
+           &{i \choose j + 2^k - \textcolor{myb}{j}}{2^k \choose j} \text{ mod 2}\\ + \\ 
+           &\sum_{r=j+1}^{\textcolor{myb}{2^k -1}} {i \choose j-r} {2^k \choose r} \text{ mod 2 } \\ + \\ 
+           &{i \choose j + 2^k - \textcolor{myb}{2^k}}{2^k \choose 2^k}\text{ mod 2}\\ \\
+         = &0 + 0 + 0 + {i \choose j}\text{ mod 2}\\   \\ 
+         = &{i \choose j} \text{mod 2} \\ 
+     \textbf{Par définition}\text{,} = &\textcolor{red}{P(i, j)} 
+            \end{align*} 
+        Ainsi, la porposition (1.10) est vraie; $P(i, j) = P(2^k +i, 2^k +j) = {i \choose j} \text{mod 2}$ 
+        \end{Preuve*}
+
+        En conclusion, les proposition $1.9$ et $1.10$ sont toutes deux vrais. Par conséquent, 
+        nous pouvons affirmer que l'identité est bien valide :
+            \[ P(i, j) = \sum_{r=0}^{j} {i \choose j-r} {2^k \choose r} \text{ mod } 2   \]
+            \qed
+        \begin{enumerate}
+            \item Utilisez ce résultat pour expliquer la similarité observée entre le triangle de Sierpiński
+                et le \textit{triangle de Pascal modulo 2}.
+        \end{enumerate}
+
+        \begin{Concept*}{}{}
+            Dans le triangle de Pascal, chaque nombre est le résultat de la somme de deux nombres 
+            situés exactement au-dessus (\textit{Figure 1.1}). Lorsqu'on calcule les coefficients 
+            binomiaux du triangle de Pascal modulo 2, on obtient des valeurs de $0$ ou $1$, puisque chaque 
+            nombre découlant d'un coefficient est soit pair ou impair, et donc chaque nombre 
+            découlant d'un coefficient est divisible par $2$ ou engendre un reste de $1$ lorsqu'on le divise 
+            par deux. 
+        \end{Concept*}
+        La preuve que nous venons de compléter a montré que pour tout naturel $i$, $2^k$, et $j$, le 
+        coefficient binomial ${i  + 2^k \choose j} \text{ mod 2}$ a les mêmes propriétés de divisibilité 
+        que ${ i \choose j} \text{ mod 2}$. Autrement dit, 
+        
+        \begin{itemize}
+            \item \textbf{Égalité 1} Proposition (1.9) \\ Chaque nombre à la ligne $i$ et la colonne $j$ 
+        du \textit{triangle de Pascal modulo 2} a une valeur équivalente au nombre présent à la ligne
+            $i + 2^k$  et le colonne $j$.
+            \item \textbf{Égalité 2} Proposition (1.10) \\  Chaque nombre à la ligne $i$ et la colonne $j$ 
+        du \textit{triangle de Pascal modulo 2} a une valeur équivalente au nombre présent à la ligne
+            $i + 2^k$ et la colonne $j + 2^k$
+        \end{itemize} 
+        Dans le \textit{triangle de Pascal modulo 2},  on peut conceptualiser chaque entrée \textbf{\texttt{1}} 
+        comme étant un \textbf{triangle plein} et chaque entrée \textbf{\texttt{0}} 
+        comme étant un triangle vide formant un approximation de Sierpinski.  
+        Par ailleurs, si une ligne $i$ est elle que $2|i + 1$  il existe un \textit{triangle complètement simétrique} 
+        de heuteur $i + 1$ composés de triangle pleins et de triangle vides.
+
+        Par exemple, la \textbf{ligne 3} est du \textit{triangle de Pascal modulo 2} est telle que 
+        $2 | 3 + 1$. Et si on plaçait lest triangle de façon à former un 
+        \textit{triangle complètement simétrique}, on obtiendrait un triangle de hauteur $4$, 
+        une approximation du triangle de Sirpinski :
+
+        \begin{figure}[H]
+            \includegraphics[width=0.3\textwidth]{PascalModulo2.jpg}
+            \caption{Approximation de Sierpinski à partir de Pascal modulo 2}
+        \end{figure}
+        
+
+
+
+        Cette propriété reflète la répétition et l'auto-similarité dans le triangle de Pascal modulo 2, 
+        qui sont des caractéristiques clés du triangle de Sierpiński.
+
+        On peut conceptualiser le triangle de Sierpinski comme étant un triangle récursif composé de triangles 
+        pleins et de triangle vide. Par ailleurs, en commeçant par la ligne 0, 
+        si une ligne $i$ est telle que $2|i + 1$  il existe un \textit{triangle complètement simétrique} 
+        de heuteur $i + 1$ composés de triangle pleins et de triangle vides. L'identité que nous avons 
+        prouvé suggère que chaque triangle à une position $(i,j)$ aura la même propriété 
+        (plein ou vide) qu'un triangle situé à la position $(i + 2^k, j)$, où $i$ et $j$ représentent les 
+        lignes et les colonnes du triangle de Sierpinski, respectivement. 
+        De plus, par l'égalité de la proposition ($1.10$) 
+        que nous avons prouvé, un triangle situé à la position $(i, j)$ aura la même propriété qu'un triangle 
+        situé à la position $(i + 2^k, j + 2^k)$. 
+        \end{multicols*}  
 
 \end{document} 
