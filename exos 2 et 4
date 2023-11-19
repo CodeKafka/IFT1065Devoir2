@@ -118,9 +118,16 @@ Par induction, $\forall k \in \mathbb{N}, 3 \mid (2^k \times 2^k - 1)$.
     Ainsi, à chaque cas, l'algorithme renvoie la réponse correcte, donc \(\text{Vérification}(A)\) est valable pour toutes les expressions logiques de \(F\).
 
     \item
-\subsection*{Cas de base:} \forall x \in P, x \in F$ est l'expressions la plus simple de F ne contenant pas de parenthèses donc pour ces expressions le nombre de parenthèses ouvrante et fermante est le même soit zéro.
+\subsection*{Cas de base:}
+
+\forall x \in P, x \in F$ est l'expressions la plus simple de F ne contenant pas de parenthèses donc pour ces expressions le nombre de parenthèses ouvrante et fermante est le même soit zéro.
 
 \subsection*{Étape inductive:}
+Supposons $A, B \in  F$ des expression qui possèdent autant de parenthèses ouvrantes que fermante, disons de complexité inferieure à n. \\
+Lorsqu'on forme une expression à partir de deux expression A et B soit une expression de complexité égale à n à l'aide d'un operateur logique $\lor$ et $\land$ elles conservent individuellement le même nombre de parenthèses. \\ 
+Si on place l'expression logique entre parenthèses, elles font toujours partie de F et possède le meme nombre de parenthèse ouvrante que fermante. \\
+Finalement, si on fait la negation d'une expression logique $\lnot A$, elle possède toujours le meme nombre de parenthèses soit celui de A. \\
+Ainsi, chaque opération qui construit une nouvelle expression à partir d'expressions plus petites préserve la propriété des parenthèses équilibrées.
 
     
 \end{enumerate}
