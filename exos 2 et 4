@@ -1,0 +1,117 @@
+\begin{document}
+
+\maketitle
+
+\section*{Problème 2}
+
+\begin{enumerate}
+
+    \item % (mettre le dessin des échiquiers)
+    \item
+
+\subsection*{Cas de base ($k = 0$):}
+Pour $k = 0$, nous avons un échiquier $1 \times 1$ avec une seule cellule. La formule devient $3 \mid (2^0 \times 2^0 - 1)$, ce qui se simplifie en $3 \mid (1 - 1)$, confirmant que trois divise zéro.
+
+\subsection*{Cas de base ($k = 1$):}
+Pour $k = 1$, nous avons un échiquier $2 \times 2$ avec quatre cases. La formule devient $3 \mid (2^1 \times 2^1 - 1)$, ce qui se simplifie en $3 \mid (4 - 1)$, confirmant que trois divise trois.
+
+\subsection*{Étape inductive:}
+Supposons $3 \mid (2^n \times 2^n - 1)$ pour un $k = n$ arbitraire.
+
+Maintenant, nous voulons montrer que $3 \mid (2^{n+1} \times 2^{n+1} - 1)$.
+
+Nous avons $U_n$: $3 \mid (2^n \times 2^n - 1)$.
+
+Considérons maintenant $U_{n+1}$: $3 \mid (2^{n+1} \times 2^{n+1} - 1)$.
+
+Cela peut s'écrire comme $3 \mid (4(2^n \times 2^n - 1) + 3)$.
+
+Puisque $3 \mid (2^n \times 2^n - 1)$, nous pouvons dire $3 \mid (4(2^n \times 2^n - 1))$.
+
+Ajouter 3 à un multiple de 4 ne change pas sa divisibilité par 3.
+
+Par conséquent, $3 \mid (4(2^n \times 2^n - 1) + 3)$.
+
+Par induction, $\forall k \in \mathbb{N}, 3 \mid (2^k \times 2^k - 1)$.
+
+
+\item PositionsTriominos(k, (x, y)): \\
+    \quad listeARetourner = [] \\
+    \quad \textbf{Si} \( k = 0 \): \\
+    \quad \quad \textbf{Retourner} une liste vide \\
+    \quad \textbf{Sinon, si} \( k = 1 \): \\
+    \quad \quad \textbf{Si} \( x \) est pair et \( y \) est pair: \\
+    \quad \quad \quad Ajouter \([[x-1, y-1], [x, y-1], [x-1, y]]\) à listeARetourner \\
+    \quad \quad \textbf{Sinon, si} \( x \) est impair et \( y \) est impair: \\
+    \quad \quad \quad Ajouter \([[x+1, y+1], [x+1, y], [x, y+1]]\) à listeARetourner \\
+    \quad \textbf{Sinon, si} \( x \) est impair et \( y \) est pair: \\
+    \quad \quad Ajouter \([[x, y-1], [x+1, y], [x+1, y-1]]\) à listeARetourner \\
+    \quad \textbf{Sinon, si} \( x \) est pair et \( y \) est impair: \\
+    \quad \quad Ajouter \([[x, y+1], [x-1, y], [x-1, y+1]]\) à listeARetourner \\
+    \quad \textbf {Tant que $k > 1$} \\
+    \quad \quad PositionsTriominos(k-1,(x,y))
+    
+
+\end{enumerate}
+
+\section*{Problème 4}
+
+\begin{enumerate}
+    \item 
+    \begin{itemize}
+        \item \textbf{Cas de base:} $() \in F$ et $\forall x \in P, (x) \in F$
+        
+        \item \textbf{Constructeur:} Soit $A, B \in F$ \\
+        $(A) \in F$ \\
+        $\lnot A \in F$ \\
+        $A \lor B \in F$ \\
+        $A \land B \in F$
+    \end{itemize}
+
+    \item \textbf{Fonction de vérification:}
+\end{enumerate}
+
+    \textbf{Vérification (A):}
+    \begin{align*}
+        &\text{Si } A \text{ est ()} \\
+        &\quad \text{retourner vrai} \\
+        &\text{Si } A \text{ appartient à } P \\
+        &\quad \text{retourner vrai} \\
+        &\text{Si } A \text{ est (expression)} \\
+        &\quad \text{retourner } \text{Vérification}(\text{expression}) \\
+        &\text{Si } A \text{ est non expression} \\
+        &\quad \text{retourner } \text{Vérification}(\text{expression}) \\
+        &\text{Si } A \text{ est expression1 et logique expression2} \\
+        &\quad \text{retourner } \text{Vérification}(\text{expression1}) \text{ et } \text{Vérification}(\text{expression2}) \\
+        &\text{Si } A \text{ est expression1 ou logique expression2} \\
+        &\quad \text{retourner } \text{Vérification}(\text{expression1}) \text{ et } \text{Vérification}(\text{expression2})
+    \end{align*}
+
+    Pour tout \(A \in F\), \(\implies\text{Vérification}(A)\) retourne vrai.
+    \item
+\subsection*{Cas de base:}
+    \begin{align*}
+        &\text{Si } A \text{ est une liste vide, } \text{Vérification}(A) \text{ retourne vrai} \\
+        &\text{Si } A \text{ est tel que } A= (p) \text{ ou } p \text{ appartient à } P, \text{Vérification}(A) \text{ retourne vrai}
+    \end{align*}
+
+\subsection*{Étape inductive:}
+    Supposons que l'algorithme fonctionne correctement pour une expression de taille inférieure à \(n\). Montrons qu'il fonctionne correctement pour une expression de taille \(n\). Considérons l'expression \(A\) telle que \(|A| = n\) et examinons tous les cas possibles:
+
+    \begin{itemize}
+        \item Si \(A\) est une expression entre parenthèses \((\text{expression})\), l'algorithme vérifie récursivement l'expression à l'intérieur des parenthèses. Par l'hypothèse d'induction, si l'expression à l'intérieur des parenthèses est correcte, alors l'algorithme renverra également vrai pour \(A\).
+        \item Si \(A\) est une négation \((\lnot\text{expression})\), l'algorithme vérifie récursivement l'expression après la négation. Encore une fois, par l'hypothèse d'induction, si l'expression après la négation est correcte, alors l'algorithme renverra vrai pour \(A\).
+        \item Si \(A\) est une conjonction \((\text{expression1}\land\text{expression2})\) ou une disjonction \((\text{expression1}\lor\text{expression2})\), l'algorithme vérifie les deux parties de la conjonction ou de la disjonction. Par l'hypothèse d'induction, si les deux parties sont correctes, alors l'algorithme renverra vrai pour \(A\).
+    \end{itemize}
+
+    Ainsi, à chaque cas, l'algorithme renvoie la réponse correcte, donc \(\text{Vérification}(A)\) est valable pour toutes les expressions logiques de \(F\).
+
+    \item
+\subsection*{Cas de base:} $() \in F$ et $\forall x \in P, (x) \in F$ sont les expressions les plus simples de F ne contenant pas de parenthèses donc pour ces expressions le nombre de parenthèses ouvrante et fermante est le meme soit zéro
+
+\subsection*{Étape inductive:}
+
+    
+\end{enumerate}
+
+\end{document}
